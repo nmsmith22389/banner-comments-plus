@@ -1,0 +1,239 @@
+{
+    "name": "banner-comments-plus",
+    "displayName": "Banner Comments +",
+    "description": "Customizable ASCII font comments to help organize your code",
+    "icon": "images/icon.png",
+    "version": "0.3.1",
+    "publisher": "lunarlimbo",
+    "homepage": "https://github.com/vanessa-luna/banner-comments-plus/blob/master/README.md",
+    "bugs": {
+        "url": "https://github.com/vanessa-luna/banner-comments-plus/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vanessa-luna/banner-comments-plus.git"
+    },
+    "engines": {
+        "vscode": "^1.20.0"
+    },
+    "keywords": [
+        "block",
+        "comment",
+        "header",
+        "banner",
+        "figlet"
+    ],
+    "categories": [
+        "Formatters",
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:banner-comments-plus.Apply",
+        "onCommand:banner-comments-plus.ApplyFromList",
+        "onCommand:banner-comments-plus.ApplyFromFavorites",
+        "onCommand:banner-comments-plus.ApplyFromConfig",
+        "onCommand:banner-comments-plus.SetDefaultFont",
+        "onCommand:banner-comments-plus.SetDefaultFontFromFavorites",
+        "onCommand:banner-comments-plus.AddFontToFavorites",
+        "onCommand:banner-comments-plus.AddCurrentFontToFavorites",
+        "onCommand:banner-comments-plus.RemoveFontFromFavorites",
+        "onCommand:banner-comments-plus.AddCustomFont",
+        "onCommand:banner-comments-plus.RemoveCustomFont",
+        "onCommand:banner-comments-plus.AddNewConfig"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "banner-comments-plus.Apply",
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "BannerComments+: Apply"
+            },
+            {
+                "command": "banner-comments-plus.ApplyFromList",
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "BannerComments+: Apply From List of Fonts"
+            },
+            {
+                "command": "banner-comments-plus.ApplyFromFavorites",
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "BannerComments+: Apply From Favorites"
+            },
+            {
+                "command": "banner-comments-plus.ApplyFromConfig",
+                "when": "editorTextFocus && !editorReadonly",
+                "title": "BannerComments+: Apply From Config (works with geddski.macros)"
+            },
+            {
+                "command": "banner-comments-plus.SetDefaultFont",
+                "title": "BannerComments+: Set Default Font"
+            },
+            {
+                "command": "banner-comments-plus.SetDefaultFontFromFavorites",
+                "title": "BannerComments+: Set Default Font From Favorites"
+            },
+            {
+                "command": "banner-comments-plus.AddFontToFavorites",
+                "title": "BannerComments+: Add Font To Favorites"
+            },
+            {
+                "command": "banner-comments-plus.AddCurrentFontToFavorites",
+                "title": "BannerComments+: Quick Add Current Default Font To Favorites"
+            },
+            {
+                "command": "banner-comments-plus.RemoveFontFromFavorites",
+                "title": "BannerComments+: Remove Font From Favorites"
+            },
+            {
+                "command": "banner-comments-plus.AddCustomFont",
+                "title": "BannerComments+: Add custom font"
+            },
+            {
+                "command": "banner-comments-plus.RemoveCustomFont",
+                "title": "BannerComments+: Remove custom font"
+            },
+            {
+                "command": "banner-comments-plus.AddNewConfig",
+                "title": "BannerComments+: Add New Config"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Banner comments +",
+            "properties": {
+                "banner-comments-plus.font": {
+                    "type": "string",
+                    "default": "Standard",
+                    "description": "Default banner font to use.",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.horizontalLayout": {
+                    "type": "string",
+                    "default": "default",
+                    "enum": [
+                        "default",
+                        "full",
+                        "fitted",
+                        "controlled smushing",
+                        "universal smushing"
+                    ],
+                    "description": "Figlet horizontal layout control \n['default', 'full', 'fitted', 'controlled smushing', 'universal smushing']",
+                    "scope": "resouce"
+                },
+                "banner-comments-plus.verticalLayout": {
+                    "type": "string",
+                    "default": "default",
+                    "enum": [
+                        "default",
+                        "full",
+                        "fitted",
+                        "controlled smushing",
+                        "universal smushing"
+                    ],
+                    "description": "Figlet vertical layout control \n['default', 'full', 'fitted', 'controlled smushing', 'universal smushing']",
+                    "scope": "resouce"
+                },
+                "banner-comments-plus.trimTrailingWhitespace": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Automatically trims the trailing whitespaces of the generated banner.",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.trimEmptyLines": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Automatically trim empty lines from output.",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.prefix": {
+                    "type": "string",
+                    "default": "",
+                    "description": "A String to place before the figlet",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.suffix": {
+                    "type": "string",
+                    "default": "",
+                    "description": "A String to place after the figlet",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.perLinePrefix": {
+                    "type": "string",
+                    "default": " ",
+                    "description": "A string to place at the beginning of each line (before comments processed)",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.commentStyle": {
+                    "type": "string",
+                    "default": "block",
+                    "enum": [
+                        "block",
+                        "line",
+                        "both"
+                    ],
+                    "description": "How comments are used in the output \n['block, 'line', 'both']",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.favorites": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "Name of Figlet Font"
+                    },
+                    "default": [],
+                    "description": "List of favorites figlet fonts.",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.customFonts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "path to .flf font"
+                    },
+                    "default": [],
+                    "description": "List of custom figlet fonts.",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.configDescriptionKeys": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "key of value in config to display in ApplyFromConfig"
+                    },
+                    "default": [
+                        "font"
+                    ],
+                    "description": "List of keys to display in ApplyFromConfig picker",
+                    "scope": "resource"
+                },
+                "banner-comments-plus.configs": {
+                    "type": "object",
+                    "default": {},
+                    "description": "Hash of stored configs for quick use\n all other settings can be used as properties of your config",
+                    "scope": "resource"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42",
+        "figlet": "^1.2.0",
+        "async": "^2.6.0",
+        "comment-json": "^1.1.3"
+    },
+    "dependencies": {
+        "async": "^2.6.0",
+        "comment-json": "^1.1.3",
+        "figlet": "^1.2.0"
+    }
+}
